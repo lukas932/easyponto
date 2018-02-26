@@ -1,0 +1,32 @@
+<!--
+  Generated template for the PontosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Histórico de pontos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content *ngIf="pontos">
+
+  <ion-card *ngFor="let ponto of pontos">
+    <ion-item>
+      <span item-left class="point-date">{{ ponto.dia | date:'dd' }}, {{ ponto.dia | date:'LLLL' }}</span>
+    </ion-item>
+
+    <ion-item>
+      <span item-left *ngFor="let h of ponto.horarios; let i = index">
+        <ion-icon color="secondary" *ngIf="i % 2 === 0" name="ios-arrow-up-outline"></ion-icon>
+        <ion-icon color="danger" *ngIf="i % 2 !== 0" name="ios-arrow-down-outline"></ion-icon>
+        {{ h.horario }}
+      </span>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

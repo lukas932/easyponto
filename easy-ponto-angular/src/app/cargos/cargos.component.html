@@ -1,0 +1,68 @@
+<!-- WRAPPER -->
+<div id="wrapper">
+  
+  <!-- NAVBAR -->
+  <app-navbar-menu></app-navbar-menu>
+  <!-- END NAVBAR -->
+  
+  <!-- LEFT SIDEBAR -->
+  <app-menu></app-menu>
+  <!-- END LEFT SIDEBAR -->
+    
+  <!-- MAIN -->
+  <div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BASIC TABLE -->
+            <div class="panel panel-headline">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="panel-title">Cargos</h3>
+                  </div>
+                  <div class="col-md-6">
+                    <a [routerLink]="['/cargos/cadastrar']" type="button" class="btn btn-success right"><i class="fa fa-plus"></i> Cadastrar</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nome</th>
+                      <th>Data de criação</th>
+                      <th>Ativo</th>
+                      <th>Editar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let cargo of cargoList">
+                      <td>{{ cargo.id }}</td>
+                      <td>{{ cargo.nome }}</td>
+                      <td>{{ cargo.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+                      <td>{{ cargo.ativo }}</td>
+                      <td>
+                          <a [routerLink]="['/cargos',cargo.id,'editar']" type="button" class="btn btn-primary">Editar</a>
+                          <button type="button" class="btn btn-danger" (click)="apagar(cargo)">Apagar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- END BASIC TABLE -->
+          </div>
+        </div>  
+      </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+  </div>
+  <!-- END MAIN -->
+
+  <app-footer></app-footer>
+</div>
+<!-- END WRAPPER -->

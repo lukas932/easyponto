@@ -1,0 +1,47 @@
+<!-- WRAPPER -->
+<div id="wrapper">
+  
+  <!-- NAVBAR -->
+  <app-navbar-menu></app-navbar-menu>
+  <!-- END NAVBAR -->
+  
+  <!-- LEFT SIDEBAR -->
+  <app-menu></app-menu>
+  <!-- END LEFT SIDEBAR -->
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-headline">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Buscar colaborador</h3>
+              </div>
+              <div class="panel-body">
+                <form [formGroup]="form" (submit)="buscar()">
+                  <div class="input-group">
+                    <input name="search" formControlName="search" class="form-control" type="text" placeholder="Digite o nome do colaborador...">
+                    <span class="input-group-btn"><button class="btn btn-primary" type="submit" [disabled]="!form.valid">Go!</button></span>
+                  </div><br>
+                </form>
+                <div *ngIf="users">
+                  <div style="display: block;" *ngFor="let user of users">
+                    <a [routerLink]="['/pontos/colaborador', user.id]">{{ user.nome }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+  </div>
+  <!-- END MAIN -->
+
+  <app-footer></app-footer>
+</div>
+<!-- END WRAPPER -->

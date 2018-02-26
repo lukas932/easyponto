@@ -1,0 +1,78 @@
+<!-- WRAPPER -->
+<div id="wrapper">
+  
+    <!-- NAVBAR -->
+    <app-navbar-menu></app-navbar-menu>
+    <!-- END NAVBAR -->
+    
+    <!-- LEFT SIDEBAR -->
+    <app-menu></app-menu>
+    <!-- END LEFT SIDEBAR -->
+    
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+        <div class="container-fluid">
+            <!-- <h3 class="page-title">Histórico</h3> -->
+            <div class="row" *ngIf="user">
+                <div class="col-md-12">
+                    <div class="panel panel-headline">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Histórico</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>Nome: {{ user.nome }}</p>
+                            <p>CPF: {{ user.cpf }}</p>
+                            <p>E-mail: {{ user.email }}</p>
+                            <p>Cargo: {{ user.cargo.nome }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" *ngIf="!pontos">
+                    <p>Nenhum registro de ponto encontrado.</p>
+                </div>
+                <div class="col-md-6" *ngIf="pontos">
+                    <div class="panel" *ngFor="let ponto of pontos">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ ponto.dia | date:'dd' }}, {{ ponto.dia | date:'LLLL' }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <span style="margin: 0px 10px 0px 0px; cursor: pointer;" *ngFor="let info of ponto.horarios; let i = index" (click)="showDetalhes(ponto.dia, info)">
+                            <i class="lnr lnr-chevron-up" *ngIf="i % 2 === 0"></i>
+                            <i class="lnr lnr-chevron-down" *ngIf="i % 2 !== 0"></i>
+                            {{ info.horario }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="detalhes != ''">
+                    <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Detalhes</h3>
+                        <div class="right">
+                        <button type="button" class="btn-remove" (click)="detalhes = []"><i class="lnr lnr-cross"></i></button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>Dia da marcação: {{ detalhes.dia | date:'dd-MM-yyyy' }}</p>
+                        <p>Horario da marcação: {{ detalhes.horario }}</p>
+                        <p>Device UUID: {{ detalhes.device_uuid }}</p>
+                        <agm-map style="height: 300px;" [zoom]="16" [latitude]="detalhes.latitude" [longitude]="detalhes.longitude">
+                        <agm-marker [latitude]="detalhes.latitude" [longitude]="detalhes.longitude"></agm-marker>
+                        </agm-map>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    
+    <app-footer></app-footer>
+</div>
+<!-- END WRAPPER -->

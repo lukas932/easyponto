@@ -1,0 +1,64 @@
+<!-- WRAPPER -->
+<div id="wrapper">
+  
+    <!-- NAVBAR -->
+    <app-navbar-menu></app-navbar-menu>
+    <!-- END NAVBAR -->
+    
+    <!-- LEFT SIDEBAR -->
+    <app-menu></app-menu>
+    <!-- END LEFT SIDEBAR -->
+  
+    <!-- MAIN -->
+    <div class="main">
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- BASIC TABLE -->
+              <div class="panel panel-headline">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Colaborador</h3>
+                </div>
+                <div class="panel-body">
+  
+                  <div *ngIf="msgSuccess" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <i class="fa fa-check-circle"></i> Usuário salvo com sucesso
+                  </div>
+  
+                  <div *ngIf="msgError" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <i class="fa fa-times-circle"></i> Houve um erro ao tentar salvar o usuário. Tente novamente mais tarde
+                  </div>
+                  <form (submit)="salvar()" class="form-auth-small">
+                    <input [(ngModel)]="user.nome" name="nome" type="text" class="form-control" placeholder="nome"><br>
+                    <input [(ngModel)]="user.email" name="email" type="text" class="form-control" placeholder="e-mail"><br>
+                    <input [(ngModel)]="user.cpf" name="cpf" type="text" class="form-control" placeholder="cpf"><br>
+                    <select [(ngModel)]="user.cargo_id" name="cargo_id" class="form-control">
+                      <option value="">Cargos</option>
+                      <option *ngFor="let cargo of cargosList" value="{{ cargo.id }}">{{ cargo.nome }}</option>
+                    </select><br>
+                    <select [(ngModel)]="user.perfil_id" name="perfil_id" class="form-control">
+                      <option value="">Perfis</option>
+                      <option *ngFor="let perfil of perfisList" value="{{ perfil.id }}">{{ perfil.descricao }}</option>
+                    </select><br>
+                    <div class="text-right">
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- END BASIC TABLE -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+  
+    <app-footer></app-footer>
+  </div>
+  <!-- END WRAPPER -->

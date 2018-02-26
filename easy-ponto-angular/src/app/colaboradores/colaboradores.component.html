@@ -1,0 +1,77 @@
+<!-- WRAPPER -->
+<div id="wrapper">
+  
+  <!-- NAVBAR -->
+  <app-navbar-menu></app-navbar-menu>
+  <!-- END NAVBAR -->
+  
+  <!-- LEFT SIDEBAR -->
+  <app-menu></app-menu>
+  <!-- END LEFT SIDEBAR -->
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BASIC TABLE -->
+            <div class="panel panel-headline">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="panel-title">Colaboradores</h3>
+                  </div>
+                  <div class="col-md-6">
+                    <a [routerLink]="['/colaboradores/cadastrar']" type="button" class="btn btn-success right"><i class="fa fa-plus"></i> Cadastrar</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nome</th>
+                      <th>CPF</th>
+                      <th>E-mail</th>
+                      <th>Perfil</th>
+                      <th>Cargo</th>
+                      <th>Data de criação</th>
+                      <th>Ativo</th>
+                      <th>Editar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of usersList">
+                      <td>{{ user.id }}</td>
+                      <td>{{ user.nome }} </td>
+                      <td>{{ user.cpf }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.perfil.descricao }}</td>
+                      <td>{{ user.cargo.nome }}</td>
+                      <td>{{ user.created_at | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+                      <td>{{ user.ativo }}</td>
+                      <td>
+                        <a [routerLink]="['/pontos/colaborador',user.id]" type="button" class="btn btn-info"><i class="fa fa-clock-o"></i> Pontos</a>
+                        <a [routerLink]="['/colaboradores',user.id,'editar']" type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
+                        <button type="button" class="btn btn-danger" (click)="apagar(user)"><i class="fa fa-trash-o"></i> Apagar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- END BASIC TABLE -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+  </div>
+  <!-- END MAIN -->
+
+  <app-footer></app-footer>
+</div>
+<!-- END WRAPPER -->
